@@ -160,7 +160,6 @@ lalu kita download dengan ip 192.219.1.1 dengan user ainur, lalu kita gunakan cm
 
 <img src="blob:https://web.whatsapp.com/89aaf918-c300-4df2-b523-bf29fb1a9e92" alt="no 9 get data / read only"/><img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/cdd9cc7d-3529-4857-9730-43ec21ec4501" />
 
-
 <img src="blob:https://web.whatsapp.com/1cc0f7bb-faef-480c-ab78-1e9e4b5857f3" alt="soal 9 wireshark"/><img width="958" height="726" alt="image" src="https://github.com/user-attachments/assets/4dd5585d-8274-4a13-ab10-e8c6424065ce" />
 
 
@@ -181,4 +180,45 @@ dengan data yang kita amati, tidak adanya terjadi packet lost atau apapun itu, d
 
 <img src="blob:https://web.whatsapp.com/f2d0931d-d4fc-426f-8ecf-4af34d900741"/><img width="698" height="176" alt="image" src="https://github.com/user-attachments/assets/fd676805-cc7b-47b3-8022-1f7b8fe0967c" />
 
+Pada soal ke-Sebelas
+```
+Sebelum era koneksi aman, Eru sering menyelinap masuk ke wilayah Melkor. Eru perlu masuk ke node tersebut untuk memeriksa konfigurasi, 
+namun ia tahu Melkor mungkin sedang memantau jaringan. Buktikan kelemahan protokol Telnet dengan membuat akun dan password baru di node 
+Melkor kemudian menangkap sesi login Eru ke node Melkor menggunakan Wireshark. Tunjukkan bagaimana username dan password dapat terlihat sebagai plain text. 
+```
+
+Pada soal ini  
+untuk membuktikan kelemahan protokol Telnet, berikut adalah isi scriptnya:  
+
+```bash
+#!/bin/bash
+telnet 192.219.1.2
+```
+
+Setelah koneksi Telnet dimulai, kita dapat menggunakan Wireshark pada jaringan yang sama untuk menangkap paket data yang dikirimkan. Dengan menggunakan filter protokol `telnet`, analisis data akan menjadi lebih mudah. Selama sesi login berlangsung, Wireshark memungkinkan kita untuk melihat username dan password yang digunakan dalam bentuk teks biasa (plain text). Sebagai contoh, username `eru` dan password `password123` dapat terlihat langsung tanpa enkripsi. Hal ini terjadi karena protokol Telnet tidak menggunakan enkripsi untuk data yang dikirimkan, sehingga semua informasi, termasuk kredensial login, dapat dengan mudah dibaca oleh siapa saja yang memantau jaringan. Kelemahan ini menunjukkan mengapa Telnet tidak lagi digunakan di era koneksi aman. Sebagai gantinya, protokol seperti SSH yang mengenkripsi data digunakan untuk menghindari risiko penyadapan. Dengan langkah-langkah ini, kita dapat membuktikan bahwa Telnet tidak aman untuk digunakan dalam jaringan yang rentan terhadap penyadapan.
+
+<img src="blob:https://web.whatsapp.com/558e8667-eea0-4c13-a36a-4b8623853b7e"/><img width="613" height="513" alt="image" src="https://github.com/user-attachments/assets/579f1efa-6f14-4469-9d8b-055594d2cfdf" />
+<img src="blob:https://web.whatsapp.com/feeaec19-e8fa-4018-92b8-2a9ef957e0e9"/><img width="1600" height="700" alt="image" src="https://github.com/user-attachments/assets/9a0548bb-6e7a-4869-b16c-c20870b6fbcd" />
+
+
+Pada soal ke-Dua belas
+```
+Eru mencurigai Melkor menjalankan beberapa layanan terlarang di node-nya. Lakukan pemindaian port sederhana dari node Eru ke 
+node Melkor menggunakan Netcat (nc) untuk memeriksa port 21, 80, dalam keadaan terbuka dan port rahasia 666 dalam keadaan tertutup.
+```
+
+Pada soal ini  
+untuk melakukan pemindaian port sederhana dari node Eru ke node Melkor menggunakan Netcat:  
+
+```bash
+#!/bin/bash
+nc -zv 192.219.1.2 21 80 666
+```
+
+Dengan menggunakan perintah di atas, kita dapat memeriksa status port pada node Melkor. Hasilnya akan menunjukkan apakah port 21 dan 80 dalam keadaan terbuka dan port 666 dalam keadaan tertutup. Perintah `-z` digunakan untuk melakukan pemindaian tanpa mengirimkan data, dan `-v` digunakan untuk menampilkan output secara detail. Analisis ini membantu Eru memastikan layanan apa saja yang berjalan di node Melkor dan mengidentifikasi potensi layanan terlarang.
+
+Namun kita pun harus membuka port yang harus di open dengan `ufw` dan `service port 80 = apache2, dan 21 servie port ftp`
+dengan ini kita harus menginstall `apt install apache2 vsftpd` agar bisa diping oleh netcat
+
+<img src="blob:https://web.whatsapp.com/ee2642cf-c12f-45bb-ab3f-1bf4237583ba"/><img width="565" height="285" alt="image" src="https://github.com/user-attachments/assets/1ca0fcb6-f7f0-4d40-a1d8-b1e5296e9cc3" />
 
