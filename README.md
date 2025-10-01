@@ -1,4 +1,4 @@
-# Jarkom-Moudl-1-2025-K-16
+# Jarkom-Modul-1-2025-K-16
 
 ### MEMBER
 1. Muhammad Ardiansyah Tri Wibowo - 5027241091
