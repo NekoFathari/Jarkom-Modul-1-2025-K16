@@ -1,4 +1,4 @@
-<img width="959" height="658" alt="image" src="https://github.com/user-attachments/assets/06e6dd11-0a10-4476-9d15-c21e64296f9b" /># Jarkom-Modul-1-2025-K-16
+# Jarkom-Modul-1-2025-K-16
 
 ### MEMBER
 1. Muhammad Ardiansyah Tri Wibowo - 5027241091
