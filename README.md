@@ -60,5 +60,71 @@ Kita bisa melakukan sesuai apa yang ada di modul yang diberikan oleh assisten, m
 
 <img src="blob:https://web.whatsapp.com/814426c5-3071-4779-9e43-e99697fb37cd"/><img width="789" height="289" alt="image" src="https://github.com/user-attachments/assets/953a2876-71fa-4e00-9ece-d49761fbd5e9" />
 
+Pada soal kelima
+```
+Ainur terkuat Melkor tetap berusaha untuk menanamkan kejahatan ke dalam Arda (Bumi). 
+Sebelum terjadi kerusakan, Eru dan para Ainur lainnya meminta agar semua konfigurasi 
+tidak hilang saat semua node di restart.
+```
+
+Pada soal ini kita diminta untuk ketika node direstart konfigurasinya tidak hilang, sesuai yang ada dimodul, kita bisa menggunakan `/root/.bashrc` atau membuat script tersendiri agar tiap sekali kita restart bisa langsung terkonfigurasi secara otomatis tanpa mengulang dari awal.
+
+Saya memanfaatkan keduanya, salah satu configurasi skript `soal5.sh` sudah cukup untuk membantu dari soal 1-10.
+
+<img width="939" height="965" alt="image" src="https://github.com/user-attachments/assets/f21690bb-a4bd-48bd-a063-cc4d17530403" />
+
+Pada soal ke-enam
+```
+Setelah semua Ainur terhubung ke internet, Melkor mencoba menyusup ke dalam komunikasi antara Manwe dan Eru. 
+Jalankan file berikut (link file) lalu lakukan packet sniffing menggunakan Wireshark pada koneksi antara Manwe dan Eru, 
+lalu terapkan display filter untuk menampilkan semua paket yang berasal dari atau menuju ke IP Address Manwe. 
+Simpan hasil capture tersebut sebagai bukti.
+```
+
+Pada soal ini sendiri, kita diminta untuk shifting terhadap jaringan Manwe dengan Eru, dengan menjalankan file yang diberikan, kita mendapatkan hasil yang dapat dilihat di `soal6.pcapng` atau melalui dokumentasi berikut:
+
+<img src="blob:https://web.whatsapp.com/ae7dbbfa-4c64-4a5a-9387-dbbf09800d87"/><img width="1600" height="850" alt="image" src="https://github.com/user-attachments/assets/8f976ece-b0a0-4676-a909-5d65b9e76281" />
+
+
+Pada soal ke-tujuh
+```
+Untuk meningkatkan keamanan, Eru memutuskan untuk membuat sebuah FTP Server di node miliknya. 
+Lakukan konfigurasi FTP Server pada node Eru. Buat dua user baru: ainur dengan hak akses write&read 
+dan melkor tanpa hak akses sama sekali ke direktori shared. Buktikan hasil tersebut dengan membuat file 
+teks sederhana kemudian akses file tersebut menggunakan kedua user.
+```
+
+Pada soal ini kita dapat menginstall `apt install vsftpd` sebagai FTP Server pada eru, dan Client menggunakan  `apt install ftp`. lengkapnya melalui skript `soal7.sh` sudah bisa dijalankan secara otomatis dengan membuat user Melkor dan Ainur.
+
+soal7.sh
+```
+# Konfigurasi user ainur dan melkor
+echo "Membuat user ainur dan melkor..."
+useradd -m ainur
+## Set password untuk user ainur yaitu ainur 
+echo "ainur:ainur" | chpasswd
+# Direktori home yang dimiliki root (Wajib untuk vsftpd keamanan modern)
+mkdir -p /home/ainur/ftp_root && chown root:root /home/ainur/ftp_root && chmod 555 /home/ainur/ftp_root
+
+# Direktori untuk file bersama (tempat ainur bisa menulis)
+mkdir /home/ainur/ftp_root/share_files && chown ainur:ainur /home/ainur/ftp_root/share_files && chmod 775 /home/ainur/ftp_root/share_files
+usermod -d /home/ainur/ftp_root ainur
+
+echo "User ainur sudah dibuat."
+echo "Membuat user melkor..."
+useradd -m melkor
+## Set password untuk user melkor yaitu melkor
+echo "melkor:melkor" | chpasswd
+mkdir -p /home/melkor/no_access && chown root:root /home/melkor/no_access && chmod 500 /home/melkor/no_access && usermod -d /home/melkor/no_access melkor
+cd /home/ainur/ftp_root/ && chmod u-w share_files && chmod 555 share_files
+
+```
+
+setelah itu kita melakukan `service vsftpd restart` agar config bisa terapply dengan baik
+
+<img src="blob:https://web.whatsapp.com/46c3d41e-069b-4592-9339-7ef01cd2b4e3"/><img width="947" height="522" alt="image" src="https://github.com/user-attachments/assets/0d1dc757-b9c9-498d-a2e5-fa6ec7ff3eb2" />
+
+<img src="blob:https://web.whatsapp.com/7d68f4f8-d93b-4a17-a55c-dace70783495"/><img width="947" height="435" alt="image" src="https://github.com/user-attachments/assets/14ad71ce-1f8b-4cef-bc04-92870364fcb2" />
+
 
 
