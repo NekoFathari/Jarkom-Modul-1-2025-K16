@@ -1,4 +1,4 @@
-# Jarkom-Modul-1-2025-K-16
+<img width="959" height="658" alt="image" src="https://github.com/user-attachments/assets/06e6dd11-0a10-4476-9d15-c21e64296f9b" /># Jarkom-Modul-1-2025-K-16
 
 ### MEMBER
 1. Muhammad Ardiansyah Tri Wibowo - 5027241091
@@ -126,5 +126,59 @@ setelah itu kita melakukan `service vsftpd restart` agar config bisa terapply de
 
 <img src="blob:https://web.whatsapp.com/7d68f4f8-d93b-4a17-a55c-dace70783495"/><img width="947" height="435" alt="image" src="https://github.com/user-attachments/assets/14ad71ce-1f8b-4cef-bc04-92870364fcb2" />
 
+Pada soal ke-Delapan
+```
+Ulmo, sebagai penjaga perairan, perlu mengirimkan data ramalan cuaca ke node Eru. 
+Lakukan koneksi sebagai client dari node Ulmo ke FTP Server Eru menggunakan user ainur. Upload sebuah file berikut (link file). 
+Analisis proses ini menggunakan Wireshark dan identifikasi perintah FTP yang digunakan untuk proses upload.
+
+```
+
+Kita harus mendownload dengan `wget` dengan command `wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=11ra_yTV_adsPIXeIPMSt0vrxCBZu0r33' -O cuaca.zip
+
+lalu kita menggunakan unzip, namun sebelum itu kita harus `apt install unzip` agar bisa menggunakan unzip dan jangan lupa `apt install ftp` biar kita bisa menggunakan `ftp`
+
+lalu kita upload dengan ip 192.219.1.1 dengan user ainur, lalu kita gunakan cmd `put cuaca.txt` biar bisa upload di ftp Eru.
+
+<img src="blob:https://web.whatsapp.com/e2d1dea5-793b-4862-afd8-787d8df59e2c" alt="no 8"/><img width="959" height="658" alt="image" src="https://github.com/user-attachments/assets/100a2a65-ab89-41fc-83b5-b578a3f7cd07" />
+
+
+Pada soal ke-Sembilan
+```
+Eru ingin membagikan "Kitab Penciptaan" di (link file) kepada Manwe. 
+Dari FTP Server Eru, download file tersebut ke node Manwe. 
+Karena Eru merasa Kitab tersebut sangat penting maka ia mengubah akses user ainur menjadi read-only. 
+Gunakan Wireshark untuk memonitor koneksi, identifikasi perintah FTP yang digunakan, dan uji akses user ainur.
+```
+
+Pada soal ini 
+Kita harus mendownload dengan `wget` dengan command `wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=11ra_yTV_adsPIXeIPMSt0vrxCBZu0r33' -O kitab.zip`
+
+lalu kita menggunakan unzip, namun sebelum itu kita harus `apt install unzip` agar bisa menggunakan unzip dan jangan lupa `apt install ftp` biar kita bisa menggunakan `ftp`
+
+lalu kita download dengan ip 192.219.1.1 dengan user ainur, lalu kita gunakan cmd `get kitab_penciptaan.txt` biar bisa download dari ftp Eru. Pastikan user ainur hanya memiliki akses read-only untuk menguji perubahan akses yang dilakukan oleh Eru.
+
+<img src="blob:https://web.whatsapp.com/89aaf918-c300-4df2-b523-bf29fb1a9e92" alt="no 9 get data / read only"/><img width="1600" height="900" alt="image" src="https://github.com/user-attachments/assets/cdd9cc7d-3529-4857-9730-43ec21ec4501" />
+
+
+<img src="blob:https://web.whatsapp.com/1cc0f7bb-faef-480c-ab78-1e9e4b5857f3" alt="soal 9 wireshark"/><img width="958" height="726" alt="image" src="https://github.com/user-attachments/assets/4dd5585d-8274-4a13-ab10-e8c6424065ce" />
+
+
+Pada soal ke-Sepuluh
+```
+Melkor yang marah karena tidak diberi akses, mencoba melakukan serangan dengan mengirimkan banyak sekali request ke server Eru. Gunakan command ping dari node Melkor ke node Eru dengan jumlah paket yang tidak biasa (spam ping misalnya 100 paket). Amati hasilnya, apakah ada packet loss? Catat average round trip time untuk melihat apakah serangan tersebut mempengaruhi kinerja Eru.
+```
+
+Pada soal ini  
+untuk melakukan spam ping dari node Melkor ke node Eru. Berikut adalah isi scriptnya:  
+
+```bash
+#!/bin/bash
+ping -c 100 192.219.1.1
+```
+
+dengan data yang kita amati, tidak adanya terjadi packet lost atau apapun itu, dikarenakan semua server berjalan dalam satu jaringan yang sama, dan terhubung denga ethernet. Tidak ada mungkin kejadian packet lost pada kondisi ini.
+
+<img src="blob:https://web.whatsapp.com/f2d0931d-d4fc-426f-8ecf-4af34d900741"/><img width="698" height="176" alt="image" src="https://github.com/user-attachments/assets/fd676805-cc7b-47b3-8022-1f7b8fe0967c" />
 
 
