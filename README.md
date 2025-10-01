@@ -10,7 +10,11 @@ https://docs.google.com/document/d/1DJRVpIwqNb6KUA0gsWtQ4rguR8S7h-zebR1OGQ9xkQw/
 ### REPORTING 
 Pada soal pertama yaitu
 ```
-Untuk mempersiapkan pembuatan entitas selain mereka,Eru yang berperan sebagai Router membuat dua Switch/Gateway. Dimana Switch 1 akan menuju ke dua Ainur yaitu Melkor dan Manwe. Sedangkan Switch 2 akan menuju ke dua Ainur lainnya yaitu Varda dan Ulmo. Keempat Ainur tersebut diberi perintah oleh Eru untuk menjadi Client.
+Untuk mempersiapkan pembuatan entitas selain mereka,
+Eru yang berperan sebagai Router membuat dua Switch/Gateway.
+Dimana Switch 1 akan menuju ke dua Ainur yaitu Melkor dan Manwe.
+Sedangkan Switch 2 akan menuju ke dua Ainur lainnya yaitu Varda dan Ulmo.
+Keempat Ainur tersebut diberi perintah oleh Eru untuk menjadi Client.
 
 ```
 Dengan modul yang telah diberikan, yang dapat diakses pada laman berkut 
@@ -23,7 +27,8 @@ Dengan mengikuti step ini, maka kita sudah dapat menyelesaikan soal pertama
 
 Pada soal kedua
 ```
-Karena menurut Eru pada saat itu Arda (Bumi) masih terisolasi dengan dunia luar, maka buat agar Eru dapat tersambung ke internet.
+Karena menurut Eru pada saat itu Arda (Bumi) masih terisolasi dengan dunia luar,
+maka buat agar Eru dapat tersambung ke internet.
 
 ```
 
@@ -46,7 +51,8 @@ kita manfaatkan command `ping [ip client/target] -c 10` yang kita akan limit pak
 
 Pada soal Keempat
 ```
-Setelah berhasil terhubung, sekarang Eru ingin agar setiap Ainur (Client) dapat mandiri. Oleh karena itu pastikan agar setiap Client dapat tersambung ke internet.
+Setelah berhasil terhubung, sekarang Eru ingin agar setiap Ainur (Client) dapat mandiri.
+Oleh karena itu pastikan agar setiap Client dapat tersambung ke internet.
 
 ```
 
