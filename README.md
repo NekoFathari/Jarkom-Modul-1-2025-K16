@@ -255,3 +255,181 @@ Keamanan ini disebabkan oleh penggunaan algoritma enkripsi yang kuat dalam SSH, 
 <img src="blob:https://web.whatsapp.com/e2195600-10e2-4588-bde7-b32852e7901c" alt="no 13"/><img width="877" height="498" alt="image" src="https://github.com/user-attachments/assets/fd6e4abc-ffe0-41ed-9899-b020571a35af" />
 
 <img src="blob:https://web.whatsapp.com/1c7d1f69-963b-42ba-9e64-314f1964e3e5" alt="no 13 wireshark"/><img width="1600" height="847" alt="image" src="https://github.com/user-attachments/assets/1cdfc11e-c144-4b32-98cf-ca49cc913da1" />
+
+### Soal 14
+
+Setelah gagal mengakses FTP, Melkor melancarkan serangan brute force terhadap  Manwe. Analisis file capture yang disediakan dan identifikasi upaya brute force Melkor. 
+```
+nc 10.15.43.32 3401
+```
+#### Pertanyaan 1
+```How many packets are recorded in the pcapng file? 
+Format: int
+```
+Setelah membuka wireshark, lihat ke arah pojok kanan bawah.  
+<img width="796" height="90" alt="image" src="https://github.com/user-attachments/assets/d728af2c-9232-44a1-b1b7-1c73de76c519" />
+
+Jawaban:
+```500358
+```
+#### Pertanyaan 2
+```What are the user that successfully logged in? 
+Format: user:pass
+```
+Gunakan display filter untuk mencari kalimat yang menandakan login berhasil.
+```frame contains "success"
+ ```
+<img width="1631" height="99" alt="image" src="https://github.com/user-attachments/assets/41421060-6be3-4f57-b9da-91babd9f621a" />
+
+Klik kanan pada file tersebut, follow > TCP stream.
+<img width="835" height="584" alt="image" src="https://github.com/user-attachments/assets/f3611437-5a27-4366-b91c-790b99a3bc35" />
+
+Terlihat di situ nama username dan juga password.
+Jawaban
+```n1enna:y4v4nn4_k3m3nt4r1
+```
+#### Pertanyaan 3
+```In which stream were the credentials found? 
+Format: int
+```
+Keluar dari TCP stream tadi dan lihat ke bagian filter.
+ <img width="475" height="129" alt="image" src="https://github.com/user-attachments/assets/7ddde7a3-36b9-4f01-acc6-222598e3cb40" />
+
+Jawaban
+```41824
+```
+#### Pertanyaan 4
+```What tools are used for brute force? 
+Format: Hydra v1.8.0-dev
+```
+Masuk Kembali dalam TCP stream, di sana terdapat tools yang digunakan untuk brute force.
+ <img width="835" height="584" alt="image" src="https://github.com/user-attachments/assets/f3611437-5a27-4366-b91c-790b99a3bc35" />
+
+Jawaban
+```Fuzz Faster U Fool v2.1.0-dev
+```
+#### Flag
+```Congratulations! Here is your flag: KOMJAR25{Brut3_F0rc3_N7f6C7vdFVA5f8Rn7I7O7g7nS}
+```
+ <img width="1620" height="52" alt="image" src="https://github.com/user-attachments/assets/cb60b632-2b15-4cc3-a640-c3848016a762" />
+
+### Soal 15
+```nc 10.15.43.32 3402
+```
+#### Pertanyaan 1
+```What device does Melkor use? 
+Format: string
+```
+Lihat salah satu paket USB_interrupt, di sana terdapat HID DATA yang menggunakan key.
+ <img width="849" height="459" alt="image" src="https://github.com/user-attachments/assets/4caed37c-a015-4ee9-9a01-daa7f819f7fc" />
+
+Adanya hal di atas menunjukkan device yang digunakan adalah keyboard.
+Jawaban
+```
+Keyboard
+```
+#### Pertanyaan 2
+```What did Melkor write? 
+Format: string
+```
+Kumpulkan semua USB_interrupt dengan filter.
+```usb.transfer_type == 0x01
+```
+ <img width="1287" height="601" alt="image" src="https://github.com/user-attachments/assets/f88246ce-c2a6-40f8-a9d6-43be1bd2766f" />
+
+File > Export as plain text.
+Decode file dengan run python.
+```
+python3 decode_hid.py hid_packets.txt > decoded.txt
+```
+<img width="618" height="82" alt="image" src="https://github.com/user-attachments/assets/dd5489e0-e3ee-4e6a-8f95-5edd44798819" />
+Jawaban
+```
+UGx6X3ByMHYxZGVfeTB1cl91czNybjRtZV80bmRfcDRzc3cwcmQ=
+```
+#### Pertanyaan 3
+```
+What is Melkor's secret message? Format: string
+```
+Terjemahkan message sebelumnya dengan base64.
+```
+echo "UGx6X3ByMHYxZGVfeTB1cl91czNybjRtZV80bmRfcDRzc3cwcmQ=" | base64 --decode
+```
+<img width="465" height="71" alt="image" src="https://github.com/user-attachments/assets/f1858e3f-9715-492b-881c-8eb909c8da50" />
+Jawaban
+```
+Plz_pr0v1de_y0ur_us3rn4me_4nd_p4ssw0rd
+```
+#### Flag
+```
+Congratulations! Here is your flag: KOMJAR25{K3yb0ard_W4rr10r_BRxsRQ8etjElDYMOJBbksIR0d}
+```
+<img width="906" height="33" alt="image" src="https://github.com/user-attachments/assets/ae7b6921-a1cc-4ad1-8097-3788741a95aa" />
+
+### Soal 16
+```
+nc 10.15.43.32 3403
+```
+#### Pertanyaan 1
+```
+What credential did the attacker use to log in? Format: user:pass
+```
+Gunakan filter ini untuk mencari user dan pass.
+```
+ftp.request.command== "USER" || ftp.request.command == "PASS"
+```
+<img width="920" height="122" alt="image" src="https://github.com/user-attachments/assets/e0edd09d-8cfe-4b16-8c14-3ddbd96acc8f" />
+Jawaban 
+```
+ind@psg420.com:{6r_6e#TfT1p
+```
+#### Pertanyaan 2
+```
+How many files are suspected of containing malware? Format: int
+```
+Klik follow > TCP, di sana ada q.exe, w.exe, e.exe, r.exe, t.exe.
+<img width="916" height="720" alt="image" src="https://github.com/user-attachments/assets/d351ea86-ed2c-41c6-911d-01c1d1614f8c" />
+Jawaban
+```
+5
+```
+#### Pertanyaan 3
+```
+What is the hash of the first file (q.exe)? Format: sha256
+```
+Pada TCP stream terdapat PASV yang dapat menunjukkan port, bisa kita cari dengan rumus.
+```
+port = (p1*256) + p2
+```
+Artinya untuk port ini, port = (199*256)+145 = 51089
+
+Lakukan filter agar hanya terbuka port tersebut.
+
+```
+ip.addr == 216.55.163.106 && tcp.port == 51089
+```
+Follow > TCP stream > save as raw, beri nama q.exe
+Lakukan hash sha256.
+```
+sha256sum q.exe
+```
+<img width="728" height="72" alt="image" src="https://github.com/user-attachments/assets/dd43298f-a157-4af9-bfec-bf87d38276ba" />
+
+Jawaban
+```
+32e1b3732cd779af1bf7730d0ec8a7a87a084319f6a0870dc7362a15ddbd3199
+```
+#### Pertanyaan 4, 5, 6, dan 7
+```
+What is the hash of the third file (r.exe)? Format: sha256
+```
+Lakukan hal yang sama dengan pertanyaan sebelumnya, namun ganti port dan nama file.
+
+<img width="751" height="316" alt="image" src="https://github.com/user-attachments/assets/d84d092b-73a9-4287-893e-28b2d29e6ec2" />
+
+#### Flag
+```
+Congratulations! Here is your flag: KOMJAR25{Y0u_4r3_4_g00d_4nalyz3r_iDYON1mAHIfDzG2S49awKOBRm}
+```
+<img width="999" height="39" alt="image" src="https://github.com/user-attachments/assets/9c557d03-42f2-4fab-a993-7ec2ba3c6325" />
+
