@@ -251,7 +251,7 @@ ssh eru@192.219.1.1
 Setelah koneksi SSH dimulai, kita dapat menggunakan Wireshark pada jaringan yang sama untuk menangkap paket data yang dikirimkan. Namun, berbeda dengan Telnet, data yang dikirimkan melalui SSH dienkripsi sehingga tidak dapat dibaca secara langsung. Dengan menggunakan filter protokol `ssh`, kita dapat melihat bahwa semua paket data yang ditangkap hanya berupa data terenkripsi. Sebagai contoh, meskipun username `eru` dan password digunakan untuk login, informasi tersebut tidak dapat dilihat dalam bentuk teks biasa (plain text) karena telah dienkripsi oleh protokol SSH.
 
 Keamanan ini disebabkan oleh penggunaan algoritma enkripsi yang kuat dalam SSH, yang memastikan bahwa data yang dikirimkan tidak dapat diakses oleh pihak yang tidak berwenang. Dengan langkah-langkah ini, kita dapat membuktikan bahwa SSH jauh lebih aman dibandingkan Telnet untuk koneksi administratif, terutama dalam jaringan yang rentan terhadap penyadapan. Paket-paket terenkripsi yang ditangkap oleh Wireshark menjadi bukti nyata bahwa SSH melindungi data sensitif dari pengintaian.
-```
 
 <img src="blob:https://web.whatsapp.com/e2195600-10e2-4588-bde7-b32852e7901c" alt="no 13"/><img width="877" height="498" alt="image" src="https://github.com/user-attachments/assets/fd6e4abc-ffe0-41ed-9899-b020571a35af" />
+
 <img src="blob:https://web.whatsapp.com/1c7d1f69-963b-42ba-9e64-314f1964e3e5" alt="no 13 wireshark"/><img width="1600" height="847" alt="image" src="https://github.com/user-attachments/assets/1cdfc11e-c144-4b32-98cf-ca49cc913da1" />
