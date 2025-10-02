@@ -263,77 +263,91 @@ Setelah gagal mengakses FTP, Melkor melancarkan serangan brute force terhadap  M
 nc 10.15.43.32 3401
 ```
 #### Pertanyaan 1
-```How many packets are recorded in the pcapng file? 
-Format: int
+```
+How many packets are recorded in the pcapng file? Format: int
 ```
 Setelah membuka wireshark, lihat ke arah pojok kanan bawah.  
 <img width="796" height="90" alt="image" src="https://github.com/user-attachments/assets/d728af2c-9232-44a1-b1b7-1c73de76c519" />
 
 Jawaban:
-```500358
+```
+500358
 ```
 #### Pertanyaan 2
-```What are the user that successfully logged in? 
-Format: user:pass
+```
+What are the user that successfully logged in? Format: user:pass
 ```
 Gunakan display filter untuk mencari kalimat yang menandakan login berhasil.
-```frame contains "success"
+```
+frame contains "success"
  ```
 <img width="1631" height="99" alt="image" src="https://github.com/user-attachments/assets/41421060-6be3-4f57-b9da-91babd9f621a" />
 
 Klik kanan pada file tersebut, follow > TCP stream.
+
 <img width="835" height="584" alt="image" src="https://github.com/user-attachments/assets/f3611437-5a27-4366-b91c-790b99a3bc35" />
 
 Terlihat di situ nama username dan juga password.
+
 Jawaban
-```n1enna:y4v4nn4_k3m3nt4r1
+```
+n1enna:y4v4nn4_k3m3nt4r1
 ```
 #### Pertanyaan 3
-```In which stream were the credentials found? 
-Format: int
+```
+In which stream were the credentials found? Format: int
 ```
 Keluar dari TCP stream tadi dan lihat ke bagian filter.
+
  <img width="475" height="129" alt="image" src="https://github.com/user-attachments/assets/7ddde7a3-36b9-4f01-acc6-222598e3cb40" />
 
 Jawaban
-```41824
+```
+41824
 ```
 #### Pertanyaan 4
-```What tools are used for brute force? 
-Format: Hydra v1.8.0-dev
+```
+What tools are used for brute force? Format: Hydra v1.8.0-dev
 ```
 Masuk Kembali dalam TCP stream, di sana terdapat tools yang digunakan untuk brute force.
+
  <img width="835" height="584" alt="image" src="https://github.com/user-attachments/assets/f3611437-5a27-4366-b91c-790b99a3bc35" />
 
 Jawaban
-```Fuzz Faster U Fool v2.1.0-dev
+```
+Fuzz Faster U Fool v2.1.0-dev
 ```
 #### Flag
-```Congratulations! Here is your flag: KOMJAR25{Brut3_F0rc3_N7f6C7vdFVA5f8Rn7I7O7g7nS}
+```
+Congratulations! Here is your flag: KOMJAR25{Brut3_F0rc3_N7f6C7vdFVA5f8Rn7I7O7g7nS}
 ```
  <img width="1620" height="52" alt="image" src="https://github.com/user-attachments/assets/cb60b632-2b15-4cc3-a640-c3848016a762" />
 
 ### Soal 15
-```nc 10.15.43.32 3402
+```
+nc 10.15.43.32 3402
 ```
 #### Pertanyaan 1
-```What device does Melkor use? 
-Format: string
+```
+What device does Melkor use? Format: string
 ```
 Lihat salah satu paket USB_interrupt, di sana terdapat HID DATA yang menggunakan key.
+
  <img width="849" height="459" alt="image" src="https://github.com/user-attachments/assets/4caed37c-a015-4ee9-9a01-daa7f819f7fc" />
 
 Adanya hal di atas menunjukkan device yang digunakan adalah keyboard.
+
 Jawaban
 ```
 Keyboard
 ```
 #### Pertanyaan 2
-```What did Melkor write? 
-Format: string
+```
+What did Melkor write? Format: string
 ```
 Kumpulkan semua USB_interrupt dengan filter.
-```usb.transfer_type == 0x01
+```
+usb.transfer_type == 0x01
 ```
  <img width="1287" height="601" alt="image" src="https://github.com/user-attachments/assets/f88246ce-c2a6-40f8-a9d6-43be1bd2766f" />
 
@@ -343,11 +357,13 @@ Decode file dengan run python.
 python3 decode_hid.py hid_packets.txt > decoded.txt
 ```
 <img width="618" height="82" alt="image" src="https://github.com/user-attachments/assets/dd5489e0-e3ee-4e6a-8f95-5edd44798819" />
+
 Jawaban
 ```
 UGx6X3ByMHYxZGVfeTB1cl91czNybjRtZV80bmRfcDRzc3cwcmQ=
 ```
 #### Pertanyaan 3
+
 ```
 What is Melkor's secret message? Format: string
 ```
@@ -356,6 +372,7 @@ Terjemahkan message sebelumnya dengan base64.
 echo "UGx6X3ByMHYxZGVfeTB1cl91czNybjRtZV80bmRfcDRzc3cwcmQ=" | base64 --decode
 ```
 <img width="465" height="71" alt="image" src="https://github.com/user-attachments/assets/f1858e3f-9715-492b-881c-8eb909c8da50" />
+
 Jawaban
 ```
 Plz_pr0v1de_y0ur_us3rn4me_4nd_p4ssw0rd
@@ -371,6 +388,7 @@ Congratulations! Here is your flag: KOMJAR25{K3yb0ard_W4rr10r_BRxsRQ8etjElDYMOJB
 nc 10.15.43.32 3403
 ```
 #### Pertanyaan 1
+
 ```
 What credential did the attacker use to log in? Format: user:pass
 ```
@@ -379,6 +397,7 @@ Gunakan filter ini untuk mencari user dan pass.
 ftp.request.command== "USER" || ftp.request.command == "PASS"
 ```
 <img width="920" height="122" alt="image" src="https://github.com/user-attachments/assets/e0edd09d-8cfe-4b16-8c14-3ddbd96acc8f" />
+
 Jawaban 
 ```
 ind@psg420.com:{6r_6e#TfT1p
@@ -388,7 +407,9 @@ ind@psg420.com:{6r_6e#TfT1p
 How many files are suspected of containing malware? Format: int
 ```
 Klik follow > TCP, di sana ada q.exe, w.exe, e.exe, r.exe, t.exe.
+
 <img width="916" height="720" alt="image" src="https://github.com/user-attachments/assets/d351ea86-ed2c-41c6-911d-01c1d1614f8c" />
+
 Jawaban
 ```
 5
@@ -430,6 +451,228 @@ Lakukan hal yang sama dengan pertanyaan sebelumnya, namun ganti port dan nama fi
 #### Flag
 ```
 Congratulations! Here is your flag: KOMJAR25{Y0u_4r3_4_g00d_4nalyz3r_iDYON1mAHIfDzG2S49awKOBRm}
+
 ```
 <img width="999" height="39" alt="image" src="https://github.com/user-attachments/assets/9c557d03-42f2-4fab-a993-7ec2ba3c6325" />
 
+### Soal 17
+```
+nc 10.15.43.32 3404
+```
+#### Pertanyaan 1
+```
+What is the name of the first suspicious file? Format: file.exe
+```
+File > Export Objects > HTTP
+
+<img width="596" height="191" alt="image" src="https://github.com/user-attachments/assets/06aefe8b-df8b-4646-b6ed-497d9c487732" />
+
+Lewati file pertama karena itu txt.
+Jawaban
+```
+Invoice&MSO-Request.doc
+```
+
+#### Pertanyaan 2
+```
+What is the name of the second suspicious file? Format: file.exe
+```
+
+<img width="596" height="191" alt="image" src="https://github.com/user-attachments/assets/06aefe8b-df8b-4646-b6ed-497d9c487732" />
+
+File paling bawah
+Jawaban
+```
+knr.exe
+```
+#### Pertanyaan 3
+```
+What is the hash of the second suspicious file (knr.exe)? Format: sha256
+```
+File > Export Objects > HTTP > Save
+Lakukan has 256.
+```
+sha256 knr.exe
+```
+<img width="691" height="64" alt="image" src="https://github.com/user-attachments/assets/05c3bd35-bb8f-4953-96eb-b96d211504f1" />
+
+Jawaban
+```
+749e161661290e8a2d190b1a66469744127bc25bf46e5d0c6f2e835f4b92db18
+```
+
+#### Flag
+```
+Congratulations! Here is your flag: KOMJAR25{M4ster_4n4lyzer_1xcg3WUUjKpux80gm8tEdFgL0}
+```
+<img width="923" height="35" alt="image" src="https://github.com/user-attachments/assets/cb199b06-c985-4a0d-a057-9e6ac9facf06" />
+
+### Soal 18
+```
+nc 10.15.43.32 3405
+```
+#### Pertanyaan 1
+```
+How many files are suspected of containing malware? Format: int
+```
+File > Export Objects > SMB
+
+<img width="814" height="270" alt="image" src="https://github.com/user-attachments/assets/2c55cc75-9de6-4ac4-a29b-af6edd82854b" />
+
+Ada 2 file yang bernama %5cWINDOWS%5c...
+Jawaban
+```
+2
+```
+#### Pertanyaan 2
+```
+What is the name of the first malicious file? Format: file.exe
+```
+Lihat nama file pertama dari situ.
+Jawaban
+```
+d0p2nc6ka3f_fixhohlycj4ovqfcy_smchzo_ub83urjpphrwahjwhv_o5c0fvf6.exe
+```
+#### Pertanyaan 3
+```
+Apa nama file berbahaya yang kedua? Format: file.exe
+```
+Lihat nama file kedua.
+Jawaban
+```
+oiku9bu68cxqenfmcsos2aek6t07_guuisgxhllixv8dx2eemqddnhyh46l8n_di.exe
+```
+#### Pertanyaan 4
+```
+What is the hash of the first malicious file? Format: sha256
+```
+Lakukan hash 256 pada file pertama.
+```
+sha256 %5cWINDOWS%5cd0p2nc6ka3f_fixhohlycj4ovqfcy_smchzo_ub83urjpphrwahjwhv_o5c0fvf6.exe
+```
+Jawaban
+```
+59896ae5f3edcb999243c7bfdc0b17eb7fe28f3a66259d797386ea470c010040
+```
+#### Pertanyaan 5
+```
+What is the hash of the second malicious file? Format: sha256
+```
+Lakukan hash 256 pada file kedua.
+```
+sha256 %5cWINDOWS%5coiku9bu68cxqenfmcsos2aek6t07_guuisgxhllixv8dx2eemqddnhyh46l8n_di.exe
+```
+Jawaban 
+```
+cf99990bee6c378cbf56239b3cc88276eec348d82740f84e9d5c343751f82560
+```
+#### Flag
+```
+Congratulations! Here is your flag: KOMJAR25{Y0u_4re_g0dl1ke_e8XQLgCWiRzzsqZm9XqENF6bY}
+```
+<img width="940" height="29" alt="image" src="https://github.com/user-attachments/assets/29d2484e-fa36-4583-9866-da3979d8c46e" />
+
+### Soal 19
+```
+nc 10.15.43.32 3406
+```
+#### Pertanyaan 1
+```
+Who sent the threatening message? Format: string (name)
+```
+Follow > TCP Stream file manapun, cek isinya.
+
+<img width="468" height="244" alt="image" src="https://github.com/user-attachments/assets/d2238294-9ca4-4eee-8519-cbf534a08295" />
+
+Lihat nama pengirim.
+Jawaban
+```
+Your Life
+```
+#### Pertanyaan 2
+```
+How much ransom did the attacker demand ($)? Format: int
+```
+Tetap dalam TCP stream, lihat isi pesan yang dikirimkan.
+
+<img width="645" height="103" alt="image" src="https://github.com/user-attachments/assets/b5a22ac4-61ea-4849-9b4c-627517ef26f2" />
+
+Di situ terdapat nominal yang diminta.
+Jawaban
+```
+1600
+```
+#### Pertanyaan 3
+```
+What is the attacker's bitcoin wallet? Format: string
+```
+<img width="632" height="59" alt="image" src="https://github.com/user-attachments/assets/bc97a7b9-8bf4-4633-a3e5-3504248b55d0" />
+
+Masih dalam TCP stream, di sana terdapat informasi bitcoin wallet pengirim.
+Jawaban
+```
+1CWHmuF8dHt7HBGx5RKKLgg9QA2GmE3UyL
+```
+#### Flag
+```
+Congratulations! Here is your flag: KOMJAR25{Y0u_4re_J4rk0m_G0d_uYgq9qyc7cdrJ2F5gyBt0otqK}
+```
+<img width="927" height="34" alt="image" src="https://github.com/user-attachments/assets/418e7db5-cf7d-4ffe-801b-9c616528cb3c" />
+
+### Soal 20
+```
+nc 10.15.43.32 3407
+```
+#### Pertanyaan 1
+```
+What encryption method is used? Format: string
+```
+Identifikasi protokol terlebih dahulu, karena sepertinya menggunakan tls, cek dengan filter.
+```
+tls.handshake.type == 2
+```
+<img width="757" height="280" alt="image" src="https://github.com/user-attachments/assets/69017710-7301-48a8-940d-86667df511c8" />
+
+Lihat protokol, yang digunakan adalah TLS.
+
+Jawaban
+```
+TLS
+```
+#### Pertanyaan 2
+```
+What is the name of the malicious file placed by the attacker? Format: file.exe
+```
+Asisten memberikan file keyslog.txt, klik edit > prefereces > protokol > TLS > masukkan keyslog.txt, ganti seperti di bawah.
+
+<img width="924" height="555" alt="image" src="https://github.com/user-attachments/assets/fe8943df-3590-40e4-b4cb-e476d70af03e" />
+
+Kemudian restart, cari 200 success dengan filter.
+```
+http.response.code == 200
+```
+Scroll dan cari paket dengan HTTP GET, di sana ada file invest_20.
+
+<img width="1255" height="187" alt="image" src="https://github.com/user-attachments/assets/a9cfb2e8-7556-4d77-a8ce-034e40a2fcf3" />
+
+Jawaban
+```
+invest_20.dll
+```
+#### Pertanyaan 3
+```
+What is the hash of the file containing the malware? Format: sha256
+```
+Lakukan has 256 pada file invest_20.dll
+
+<img width="701" height="67" alt="image" src="https://github.com/user-attachments/assets/7e3f53af-7f4d-4620-b07b-48b0f313d54f" />
+
+Jawaban
+```
+31cf42b2a7c5c558f44cfc67684cc344c17d4946d3a1e0b2cecb8eb58173cb2f
+```
+#### Flag
+```
+Congratulations! Here is your flag: KOMJAR25{B3ware_0f_M4lw4re_Q1lBjLY0oJ3rCllqfcUS8GO4a}
+```
+<img width="922" height="42" alt="image" src="https://github.com/user-attachments/assets/ad405854-e390-4b81-8c92-d67652a3e211" />
